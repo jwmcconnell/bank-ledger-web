@@ -8,7 +8,7 @@ import {
 } from '../actions/authActions';
 
 const initialState = {
-  username: '',
+  username: null,
   loading: false,
   error: null,
 };
