@@ -1,18 +1,58 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { verifyUser } from '../../actions/authActions';
+import { getUsername, getAuthError } from '../../selectors/authSelectors';
 
-const Landing = () => {
-  return (
-    <section>
-      <h1>Landing</h1>
-      <nav>
-        <Link to="/login"><button>Login</button></Link>
-        <Link to="/sign-up"><button>Sign Up</button></Link>
-      </nav>
-    </section>
-  );
-};
+class Landing extends React.Component {
 
-Landing.propTypes = {};
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    username: PropTypes.string,
+    error: PropTypes.string,
+    fetchUser: PropTypes.func.isRequired
+  }
 
-export default Landing;
+  componentDidMount() {
+    this.props.fetchUser();
+    console.log('Trying to verify');
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+    console.log('Trying to verify pt 2s');
+    const { error, username } = this.props;
+    if(prevProps !== this.props) {
+      if(!error && username) {
+        this.props.history.push('/');
+      }
+    }
+  }
+
+  render() {
+    console.log('username', this.props.username);
+    return (
+      <section>
+        <h1>Landing</h1>
+        <nav>
+          <Link to="/login"><button>Login</button></Link>
+          <Link to="/sign-up"><button>Sign Up</button></Link>
+        </nav>
+      </section>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  username: getUsername(state),
+  error: getAuthError(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: () => dispatch(verifyUser())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Landing);
