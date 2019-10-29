@@ -5,6 +5,7 @@ describe('Auth Selectors', () => {
     const state = {
       auth: {
         username: 'jack',
+        balance: 0,
         loading: false,
         error: null,
       }
@@ -12,6 +13,7 @@ describe('Auth Selectors', () => {
 
     expect(getAuthState(state)).toEqual({
       username: 'jack',
+      balance: 0,
       loading: false,
       error: null,
     });
@@ -21,6 +23,7 @@ describe('Auth Selectors', () => {
     const state = {
       auth: {
         username: 'jack',
+        balance: 0,
         loading: false,
         error: null,
       }
@@ -33,6 +36,7 @@ describe('Auth Selectors', () => {
     const state = {
       auth: {
         username: 'jack',
+        balance: 0,
         loading: false,
         error: 'error',
       }

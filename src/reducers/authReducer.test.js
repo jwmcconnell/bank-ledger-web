@@ -13,17 +13,19 @@ describe('Auth Reducer', () => {
     const initialState = {
       loading: true,
       username: null,
+      balance: 0,
       error: null
     };
 
     const newState = reducer(initialState, {
       type: SIGN_UP,
-      payload: { username: 'jack' }
+      payload: { username: 'jack', balance: 0 }
     });
 
     expect(newState).toEqual({
       loading: false,
       username: 'jack',
+      balance: 0,
       error: null
     });
   });
@@ -32,17 +34,18 @@ describe('Auth Reducer', () => {
     const initialState = {
       loading: false,
       username: null,
+      balance: 0,
       error: null
     };
 
     const newState = reducer(initialState, {
       type: SIGN_UP_LOADING,
-      payload: { username: 'jack' }
     });
 
     expect(newState).toEqual({
       loading: true,
       username: null,
+      balance: 0,
       error: null
     });
   });
@@ -51,6 +54,7 @@ describe('Auth Reducer', () => {
     const initialState = {
       loading: true,
       username: null,
+      balance: 0,
       error: null
     };
 
@@ -62,6 +66,7 @@ describe('Auth Reducer', () => {
     expect(newState).toEqual({
       loading: false,
       username: null,
+      balance: 0,
       error: 'error'
     });
   });
@@ -70,17 +75,19 @@ describe('Auth Reducer', () => {
     const initialState = {
       loading: true,
       username: null,
+      balance: 0,
       error: null
     };
 
     const newState = reducer(initialState, {
       type: LOGIN,
-      payload: { username: 'jack' }
+      payload: { username: 'jack', balance: 0 }
     });
 
     expect(newState).toEqual({
       loading: false,
       username: 'jack',
+      balance: 0,
       error: null
     });
   });
@@ -89,17 +96,18 @@ describe('Auth Reducer', () => {
     const initialState = {
       loading: false,
       username: null,
+      balance: 0,
       error: null
     };
 
     const newState = reducer(initialState, {
       type: LOGIN_LOADING,
-      payload: { username: 'jack' }
     });
 
     expect(newState).toEqual({
       loading: true,
       username: null,
+      balance: 0,
       error: null
     });
   });
