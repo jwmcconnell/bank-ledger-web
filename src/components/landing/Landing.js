@@ -16,11 +16,9 @@ class Landing extends React.Component {
 
   componentDidMount() {
     this.props.fetchUser();
-    console.log('Trying to verify');
   }
 
   componentDidUpdate(prevState, prevProps) {
-    console.log('Trying to verify pt 2s');
     const { error, username } = this.props;
     if(prevProps !== this.props) {
       if(!error && username) {
@@ -30,7 +28,6 @@ class Landing extends React.Component {
   }
 
   render() {
-    console.log('username', this.props.username);
     return (
       <section>
         <h1>Landing</h1>
