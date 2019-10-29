@@ -5,7 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 
-import Landing from './landing/Landing';
+import Landing from '../containers/landing/Landing';
 import Home from './home/Home';
 import SignUp from '../containers/sign-up/SignUp';
 import Login from '../containers/login/Login';
