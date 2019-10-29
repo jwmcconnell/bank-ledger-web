@@ -10,7 +10,6 @@ export const loginUser = (user) => dispatch => {
 
   return fetchLogin(user)
     .then(user => {
-      console.log(user);
       dispatch({
         type: LOGIN,
         payload: user
@@ -34,7 +33,6 @@ export const signUpUser = (user) => dispatch => {
 
   return fetchSignUp(user)
     .then(user => {
-      console.log(user);
       dispatch({
         type: SIGN_UP,
         payload: user

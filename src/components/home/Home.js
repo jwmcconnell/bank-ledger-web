@@ -4,7 +4,6 @@ import { getUsername, getAccountBalance } from '../../selectors/authSelectors';
 import { connect } from 'react-redux';
 
 const Home = ({ balance }) => {
-  console.log('Balance:', balance);
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
