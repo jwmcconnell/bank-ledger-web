@@ -46,6 +46,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         loading: false,
         username: action.payload.username,
+        balance: action.payload.balance,
         error: null
       };
     case LOGIN_ERROR:
