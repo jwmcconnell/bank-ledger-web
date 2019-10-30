@@ -14,7 +14,8 @@ describe('Auth Reducer', () => {
       loading: true,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     };
 
     const newState = reducer(initialState, {
@@ -26,7 +27,8 @@ describe('Auth Reducer', () => {
       loading: false,
       username: 'jack',
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     });
   });
 
@@ -35,7 +37,8 @@ describe('Auth Reducer', () => {
       loading: false,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     };
 
     const newState = reducer(initialState, {
@@ -46,7 +49,8 @@ describe('Auth Reducer', () => {
       loading: true,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     });
   });
 
@@ -55,7 +59,8 @@ describe('Auth Reducer', () => {
       loading: true,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     };
 
     const newState = reducer(initialState, {
@@ -67,7 +72,8 @@ describe('Auth Reducer', () => {
       loading: false,
       username: null,
       balance: 0,
-      error: 'error'
+      error: 'error',
+      transactions: []
     });
   });
 
@@ -76,7 +82,8 @@ describe('Auth Reducer', () => {
       loading: true,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     };
 
     const newState = reducer(initialState, {
@@ -88,7 +95,8 @@ describe('Auth Reducer', () => {
       loading: false,
       username: 'jack',
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     });
   });
 
@@ -97,7 +105,8 @@ describe('Auth Reducer', () => {
       loading: false,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     };
 
     const newState = reducer(initialState, {
@@ -108,7 +117,8 @@ describe('Auth Reducer', () => {
       loading: true,
       username: null,
       balance: 0,
-      error: null
+      error: null,
+      transactions: []
     });
   });
 
@@ -116,7 +126,8 @@ describe('Auth Reducer', () => {
     const initialState = {
       loading: true,
       username: null,
-      error: null
+      error: null,
+      transactions: []
     };
 
     const newState = reducer(initialState, {
@@ -127,7 +138,8 @@ describe('Auth Reducer', () => {
     expect(newState).toEqual({
       loading: false,
       username: null,
-      error: 'error'
+      error: 'error',
+      transactions: []
     });
   });
 });
