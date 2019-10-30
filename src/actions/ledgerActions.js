@@ -1,4 +1,4 @@
-import { fetchBalance } from '../services/ledger-api';
+import { fetchBalance, fetchDeposit } from '../services/ledger-api';
 
 export const BALANCE_LOADING = 'BALANCE_LOADING';
 export const BALANCE = 'BALANCE';
@@ -9,15 +9,38 @@ export const getBalance = () => dispatch => {
   });
 
   return fetchBalance()
-    .then(user => {
+    .then(balance => {
       dispatch({
         type: BALANCE,
-        payload: user
+        payload: balance
       });
     })
     .catch(err => {
       dispatch({
         type: BALANCE_ERROR,
+        payload: err
+      });
+    });
+};
+
+export const DEPOSIT_LOADING = 'DEPOSIT_LOADING';
+export const DEPOSIT = 'DEPOSIT';
+export const DEPOSIT_ERROR = 'DEPOSIT_ERROR';
+export const makeDeposit = (amount) => dispatch => {
+  dispatch({
+    type: DEPOSIT_LOADING
+  });
+
+  return fetchDeposit(amount)
+    .then(transaction => {
+      dispatch({
+        type: DEPOSIT,
+        payload: transaction
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: DEPOSIT_ERROR,
         payload: err
       });
     });

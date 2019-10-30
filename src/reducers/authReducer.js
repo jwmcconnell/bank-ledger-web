@@ -9,6 +9,7 @@ import {
   VERIFY_ERROR,
   VERIFY_LOADING
 } from '../actions/authActions';
+import { DEPOSIT, DEPOSIT_LOADING, DEPOSIT_ERROR } from '../actions/ledgerActions';
 
 const initialState = {
   username: null,
@@ -24,6 +25,8 @@ export default function reducer(state = initialState, action) {
     case SIGN_UP_LOADING:
       return { ...state, loading: true };
     case VERIFY_LOADING:
+      return { ...state, loading: true };
+    case DEPOSIT_LOADING:
       return { ...state, loading: true };
     case LOGIN:
       return { 
@@ -49,12 +52,20 @@ export default function reducer(state = initialState, action) {
         balance: action.payload.balance,
         error: null
       };
+    case DEPOSIT:
+      return {
+        ...state,
+        loading: false,
+        balance: action.payload.balance
+      };
     case LOGIN_ERROR:
       return { ...state, loading: false, error: action.payload };
     case SIGN_UP_ERROR:
-      return { ...state, loading :false, error: action.payload };
+      return { ...state, loading: false, error: action.payload };
     case VERIFY_ERROR:
-      return { ...state, loading :false, error: action.payload };
+      return { ...state, loading: false, error: action.payload };
+    case DEPOSIT_ERROR:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

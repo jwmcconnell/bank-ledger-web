@@ -41,6 +41,7 @@ class Login extends React.Component {
   handleUpdate = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  
   render() {
     const { error } = this.props;
     return (
