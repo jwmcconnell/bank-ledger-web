@@ -1,27 +1,4 @@
-import { fetchBalance, fetchDeposit, fetchWithdrawal, fetchTransactions } from '../services/ledger-api';
-
-export const BALANCE_LOADING = 'BALANCE_LOADING';
-export const BALANCE = 'BALANCE';
-export const BALANCE_ERROR = 'BALANCE_ERROR';
-export const getBalance = () => dispatch => {
-  dispatch({
-    type: BALANCE_LOADING
-  });
-
-  return fetchBalance()
-    .then(balance => {
-      dispatch({
-        type: BALANCE,
-        payload: balance
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: BALANCE_ERROR,
-        payload: err
-      });
-    });
-};
+import { fetchDeposit, fetchWithdrawal, fetchTransactions } from '../services/ledger-api';
 
 export const DEPOSIT_LOADING = 'DEPOSIT_LOADING';
 export const DEPOSIT = 'DEPOSIT';
@@ -73,14 +50,12 @@ export const TRANSACTIONS_LOADING =  'TRANSACTIONS_LOADING';
 export const TRANSACTIONS =  'TRANSACTIONS';
 export const TRANSACTIONS_ERROR =  'TRANSACTIONS_ERROR';
 export const checkTransactions = (amount) => dispatch => {
-  console.log('TRING THINGSFASD');
   dispatch({
     type: TRANSACTIONS_LOADING
   });
 
   return fetchTransactions(amount)
     .then(list => {
-      console.log({ list });
       dispatch({
         type: TRANSACTIONS,
         payload: list
