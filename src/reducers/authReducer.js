@@ -7,7 +7,10 @@ import {
   SIGN_UP_ERROR,
   VERIFY,
   VERIFY_ERROR,
-  VERIFY_LOADING
+  VERIFY_LOADING,
+  LOG_OUT,
+  LOG_OUT_LOADING,
+  LOG_OUT_ERROR
 } from '../actions/authActions';
 import { 
   DEPOSIT, 
@@ -26,7 +29,8 @@ const initialState = {
   balance: 0,
   loading: false,
   error: null,
-  transactions: []
+  transactions: [],
+  loggedOut: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -43,13 +47,17 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: true };
     case TRANSACTIONS_LOADING:
       return { ...state, loading: true };
+    case LOG_OUT_LOADING:
+      return { ...state, loading: true };
     case LOGIN:
       return { 
         ...state, 
         loading: false, 
         username: action.payload.username,
         balance: action.payload.balance,
-        error: null 
+        transactions: [],
+        error: null,
+        loggedOut: false
       };
     case SIGN_UP:
       return { 
@@ -57,7 +65,9 @@ export default function reducer(state = initialState, action) {
         loading: false, 
         username: action.payload.username,
         balance: action.payload.balance,
-        error: null 
+        transactions: [],
+        error: null,
+        loggedOut: false
       };
     case VERIFY:
       return {
@@ -85,6 +95,14 @@ export default function reducer(state = initialState, action) {
         loading: false,
         transactions: action.payload
       };
+    case LOG_OUT:
+      return {
+        ...state,
+        loading: false,
+        username: null,
+        loggedOut: true,
+        transactions: [],
+      };
     case LOGIN_ERROR:
       return { ...state, loading: false, error: action.payload };
     case SIGN_UP_ERROR:
@@ -96,6 +114,8 @@ export default function reducer(state = initialState, action) {
     case WITHDRAWAL_ERROR:
       return { ...state, loading: false, error: action.payload };
     case TRANSACTIONS_ERROR:
+      return { ...state, loading: false, error: action.payload };
+    case LOG_OUT_ERROR:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
