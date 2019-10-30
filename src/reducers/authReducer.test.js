@@ -7,7 +7,7 @@ import {
   SIGN_UP_LOADING,
   SIGN_UP,
 } from '../actions/authActions';
-import { DEPOSIT, DEPOSIT_LOADING, DEPOSIT_ERROR } from '../actions/ledgerActions';
+import { DEPOSIT, DEPOSIT_LOADING, DEPOSIT_ERROR, WITHDRAWAL, WITHDRAWAL_LOADING, WITHDRAWAL_ERROR } from '../actions/ledgerActions';
 
 describe('Auth Reducer', () => {
   it('Handles the sign up action', () => {
@@ -202,6 +202,74 @@ describe('Auth Reducer', () => {
 
     const newState = reducer(initialState, {
       type: DEPOSIT_ERROR,
+      payload: 'error'
+    });
+
+    expect(newState).toEqual({
+      loading: false,
+      username: null,
+      error: 'error',
+      transactions: [],
+      balance: 0
+    });
+  });
+
+  it('Handles the withdrawal action', () => {
+    const initialState = {
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+    };
+
+    const newState = reducer(initialState, {
+      type: WITHDRAWAL,
+      payload: { balance: 10 }
+    });
+
+    expect(newState).toEqual({
+      loading: false,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 10
+    });
+  });
+
+  it('Handles the withdrawal loading action', () => {
+    const initialState = {
+      loading: false,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+    };
+
+    const newState = reducer(initialState, {
+      type: WITHDRAWAL_LOADING,
+    });
+
+    expect(newState).toEqual({
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0
+    });
+  });
+
+  it('Handles the withdrawal error action', () => {
+    const initialState = {
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+    };
+
+    const newState = reducer(initialState, {
+      type: WITHDRAWAL_ERROR,
       payload: 'error'
     });
 
