@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionForm component renders TransactionForm 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <label>
+    Withdrawal
+     Amount:
+    <input
+      name="withdrawal"
+      onChange={[Function]}
+      step="0.01"
+      type="number"
+      value={123}
+    />
+  </label>
+  <button>
+    Submit
+  </button>
+</form>
+`;

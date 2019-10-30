@@ -28,8 +28,28 @@ exports[`App component renders App 1`] = `
       path="/sign-up"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Landing)",
+          "type": [Function],
+        }
+      }
       path="/landing"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Transactions)",
+          "type": [Function],
+        }
+      }
+      path="/transactions"
     />
     <Route
       component={
