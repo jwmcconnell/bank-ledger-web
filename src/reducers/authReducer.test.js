@@ -6,6 +6,9 @@ import {
   SIGN_UP_ERROR,
   SIGN_UP_LOADING,
   SIGN_UP,
+  LOG_OUT,
+  LOG_OUT_LOADING,
+  LOG_OUT_ERROR,
 } from '../actions/authActions';
 import { DEPOSIT, DEPOSIT_LOADING, DEPOSIT_ERROR, WITHDRAWAL, WITHDRAWAL_LOADING, WITHDRAWAL_ERROR, TRANSACTIONS, TRANSACTIONS_LOADING, TRANSACTIONS_ERROR } from '../actions/ledgerActions';
 
@@ -375,6 +378,79 @@ describe('Auth Reducer', () => {
       error: 'error',
       transactions: [],
       balance: 0
+    });
+  });
+
+  it('Handles the log out action', () => {
+    const initialState = {
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+      loggedOut: false
+    };
+
+    const newState = reducer(initialState, {
+      type: LOG_OUT,
+    });
+
+    expect(newState).toEqual({
+      loading: false,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+      loggedOut: true
+    });
+  });
+
+  it('Handles the log out loading action', () => {
+    const initialState = {
+      loading: false,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+      loggedOut: false
+    };
+
+    const newState = reducer(initialState, {
+      type: LOG_OUT_LOADING,
+    });
+
+    expect(newState).toEqual({
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+      loggedOut: false
+    });
+  });
+
+  it('Handles the log out error action', () => {
+    const initialState = {
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+      loggedOut: false
+    };
+
+    const newState = reducer(initialState, {
+      type: LOG_OUT_ERROR,
+      payload: 'error'
+    });
+
+    expect(newState).toEqual({
+      loading: false,
+      username: null,
+      error: 'error',
+      transactions: [],
+      balance: 0,
+      loggedOut: false
     });
   });
 });
