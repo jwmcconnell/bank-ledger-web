@@ -127,7 +127,8 @@ describe('Auth Reducer', () => {
       loading: true,
       username: null,
       error: null,
-      transactions: []
+      transactions: [],
+      balance: 0,
     };
 
     const newState = reducer(initialState, {
@@ -139,7 +140,8 @@ describe('Auth Reducer', () => {
       loading: false,
       username: null,
       error: 'error',
-      transactions: []
+      transactions: [],
+      balance: 0,
     });
   });
 });
