@@ -7,7 +7,7 @@ import {
   SIGN_UP_LOADING,
   SIGN_UP,
 } from '../actions/authActions';
-import { DEPOSIT, DEPOSIT_LOADING, DEPOSIT_ERROR, WITHDRAWAL, WITHDRAWAL_LOADING, WITHDRAWAL_ERROR } from '../actions/ledgerActions';
+import { DEPOSIT, DEPOSIT_LOADING, DEPOSIT_ERROR, WITHDRAWAL, WITHDRAWAL_LOADING, WITHDRAWAL_ERROR, TRANSACTIONS, TRANSACTIONS_LOADING, TRANSACTIONS_ERROR } from '../actions/ledgerActions';
 
 describe('Auth Reducer', () => {
   it('Handles the sign up action', () => {
@@ -220,7 +220,7 @@ describe('Auth Reducer', () => {
       username: null,
       error: null,
       transactions: [],
-      balance: 0,
+      balance: 20,
     };
 
     const newState = reducer(initialState, {
@@ -270,6 +270,98 @@ describe('Auth Reducer', () => {
 
     const newState = reducer(initialState, {
       type: WITHDRAWAL_ERROR,
+      payload: 'error'
+    });
+
+    expect(newState).toEqual({
+      loading: false,
+      username: null,
+      error: 'error',
+      transactions: [],
+      balance: 0
+    });
+  });
+
+  it('Handles the transactions action', () => {
+    const initialState = {
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+    };
+
+    const newState = reducer(initialState, {
+      type: TRANSACTIONS,
+      payload: [{ 
+        startingBalance: 10533.88,
+        amount: 100,
+        type: 'Deposit',
+        date: '10-29-2019',
+        endingBalance: 10633.88,
+      }, {
+        startingBalance: 13656.88,
+        amount: 3123,
+        type: 'Withdrawal',
+        date: '10-29-2019',
+        endingBalance: 10533.88,
+      }]
+    });
+
+    expect(newState).toEqual({
+      loading: false,
+      username: null,
+      error: null,
+      transactions: [{ 
+        startingBalance: 10533.88,
+        amount: 100,
+        type: 'Deposit',
+        date: '10-29-2019',
+        endingBalance: 10633.88,
+      }, {
+        startingBalance: 13656.88,
+        amount: 3123,
+        type: 'Withdrawal',
+        date: '10-29-2019',
+        endingBalance: 10533.88,
+      }],
+      balance: 0
+    });
+  });
+
+  it('Handles the transactions loading action', () => {
+    const initialState = {
+      loading: false,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+    };
+
+    const newState = reducer(initialState, {
+      type: TRANSACTIONS_LOADING,
+    });
+
+    expect(newState).toEqual({
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0
+    });
+  });
+
+  it('Handles the transactions error action', () => {
+    const initialState = {
+      loading: true,
+      username: null,
+      error: null,
+      transactions: [],
+      balance: 0,
+    };
+
+    const newState = reducer(initialState, {
+      type: TRANSACTIONS_ERROR,
       payload: 'error'
     });
 
