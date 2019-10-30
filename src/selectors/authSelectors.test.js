@@ -1,4 +1,4 @@
-import { getAuthState, getUsername, getAuthError, getAccountBalance, getTransactions } from './authSelectors';
+import { getAuthState, getUsername, getAuthError, getAccountBalance, getTransactions, getLoggedOut } from './authSelectors';
 
 describe('Auth Selectors', () => {
   it('Gets the auth state', () => {
@@ -94,5 +94,19 @@ describe('Auth Selectors', () => {
       date: '10-29-2019',
       endingBalance: 10533.88,
     }]);
+  });
+
+  it('Gets if the user is logged out', () => {
+    const state = {
+      auth: {
+        username: 'jack',
+        balance: 0,
+        loading: false,
+        error: 'error',
+        loggedOut: true
+      }
+    };
+
+    expect(getLoggedOut(state)).toEqual(true);
   });
 });
