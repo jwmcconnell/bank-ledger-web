@@ -52,7 +52,7 @@ class SignUp extends React.Component {
           handleUpdate={this.handleUpdate} 
           errorMessage={error}
         />
-        <Link to="/sign-up">Create an account</Link>
+        <Link to="/login">Login</Link>
       </section>
     );
   }
