@@ -1,9 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Transaction from './Transaction';
 import { getTransactions } from '../../selectors/authSelectors';
 import { connect } from 'react-redux';
 import { checkTransactions } from '../../actions/ledgerActions';
+import { Link } from 'react-router-dom';
+
+const styles = {
+  td: {
+    border: '1px solid black',
+    textAlign: 'left',
+    padding: 8
+  },
+  table: {
+    margin: 'auto',
+    paddingTop: 20
+  }
+};
 
 class Transactions extends React.Component {
   static propTypes = {
@@ -17,28 +29,38 @@ class Transactions extends React.Component {
   
   render() {
     const { transactionsData } = this.props;
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+
     const tableData = transactionsData.map((transaction, i) => {
       return (
         <tr key={`${i}-${transaction.amount}-${transaction.endingBalance}`}>
-          <td>{transaction.startingBalance}</td>
-          <td>{transaction.amount}</td>
-          <td>{transaction.type}</td>
-          <td>{transaction.endingBalance}</td>
-          <td>{transaction.date}</td>
+          <td style={styles.td}>{formatter.format(transaction.startingBalance)}</td>
+          <td style={styles.td}>{formatter.format(transaction.amount)}</td>
+          <td style={styles.td}>{transaction.type}</td>
+          <td style={styles.td}>{formatter.format(transaction.endingBalance)}</td>
+          <td style={styles.td}>{transaction.date}</td>
         </tr>
       );
     });
-    console.log(tableData);
+
     return (
       <section>
-        <table>
+        <h1>Transactions</h1>
+        <Link to="/">
+          <button>Home</button>
+        </Link>
+        <table style={styles.table}>
           <thead>
             <tr>
-              <th>Starting Balance</th>
-              <th>Amount</th>
-              <th>Type</th>
-              <th>Ending Balance</th>
-              <th>Date</th>
+              <th style={styles.td}>Starting Balance</th>
+              <th style={styles.td}>Amount</th>
+              <th style={styles.td}>Type</th>
+              <th style={styles.td}>Ending Balance</th>
+              <th style={styles.td}>Date</th>
             </tr>
           </thead>
           {tableData}
