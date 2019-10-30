@@ -15,7 +15,10 @@ import {
   DEPOSIT_ERROR, 
   WITHDRAWAL_LOADING,
   WITHDRAWAL_ERROR,
-  WITHDRAWAL
+  WITHDRAWAL,
+  TRANSACTIONS_LOADING,
+  TRANSACTIONS,
+  TRANSACTIONS_ERROR
 } from '../actions/ledgerActions';
 
 const initialState = {
@@ -23,6 +26,7 @@ const initialState = {
   balance: 0,
   loading: false,
   error: null,
+  transactions: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -36,6 +40,8 @@ export default function reducer(state = initialState, action) {
     case DEPOSIT_LOADING:
       return { ...state, loading: true };
     case WITHDRAWAL_LOADING:
+      return { ...state, loading: true };
+    case TRANSACTIONS_LOADING:
       return { ...state, loading: true };
     case LOGIN:
       return { 
@@ -73,6 +79,12 @@ export default function reducer(state = initialState, action) {
         loading: false,
         balance: action.payload.balance
       };
+    case TRANSACTIONS:
+      return {
+        ...state,
+        loading: false,
+        transactions: action.payload
+      };
     case LOGIN_ERROR:
       return { ...state, loading: false, error: action.payload };
     case SIGN_UP_ERROR:
@@ -82,6 +94,8 @@ export default function reducer(state = initialState, action) {
     case DEPOSIT_ERROR:
       return { ...state, loading: false, error: action.payload };
     case WITHDRAWAL_ERROR:
+      return { ...state, loading: false, error: action.payload };
+    case TRANSACTIONS_ERROR:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

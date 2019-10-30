@@ -46,8 +46,23 @@ const fetchWithdrawal = (amount) => {
     });
 };
 
+const fetchTransactions = () => {
+  return fetch('http://localhost:3000/api/v1/ledger/transactions', {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  })
+    .then(res => ([res.ok, res.json()]))
+    .then(([ok, json]) => {
+      if(!ok) throw 'Error retrieving transactions.';
+
+      return json;
+    });
+};
+
 export {
   fetchBalance,
   fetchDeposit,
-  fetchWithdrawal
+  fetchWithdrawal,
+  fetchTransactions
 };

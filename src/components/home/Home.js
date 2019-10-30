@@ -4,6 +4,7 @@ import { getUsername, getAccountBalance } from '../../selectors/authSelectors';
 import { connect } from 'react-redux';
 import TransactionForm from './TransactionForm';
 import { makeDeposit, makeWithdrawal } from '../../actions/ledgerActions';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
 
@@ -28,8 +29,6 @@ class Home extends React.Component {
       this.props.makeWithdrawal(this.state.withdrawal);
       this.setState({ withdrawal: 0 });
     }
-    
-    
   };
 
   handleUpdate = e => {
@@ -47,6 +46,10 @@ class Home extends React.Component {
     return (
       <section>
         <h1>Home</h1>
+        <Link to="/transactions">
+          <button>View Transactions</button>
+        </Link>
+        
         <h3>Balance: { formattedBalance }</h3>
         <TransactionForm 
           handleSubmit={this.handleSubmit} 

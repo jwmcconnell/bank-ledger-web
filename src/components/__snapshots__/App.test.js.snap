@@ -45,6 +45,18 @@ exports[`App component renders App 1`] = `
           "$$typeof": Symbol(react.memo),
           "WrappedComponent": [Function],
           "compare": null,
+          "displayName": "Connect(Transactions)",
+          "type": [Function],
+        }
+      }
+      path="/transactions"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
           "displayName": "Connect(WithSession)",
           "type": [Function],
         }
