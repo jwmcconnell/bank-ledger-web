@@ -9,11 +9,12 @@ import {
 
 jest.mock('../services/auth-api.js', () => ({
   fetchLogin: () => Promise.resolve({ username: 'jack' }),
-  fetchSignUp: () => Promise.resolve({ username: 'jack' })
+  fetchSignUp: () => Promise.resolve({ username: 'jack' }),
+  fetchVerify: () => Promise.resolve({ username: 'jack', balance: 0 })
 }));
 
 describe('Auth Actions', () => {
-  it('it dispatches a loading action adn a fetch login action', () => {
+  it('it dispatches a loading action and a fetch login action', () => {
     const thunk = loginUser();
     const dispatch = jest.fn();
 
@@ -30,7 +31,7 @@ describe('Auth Actions', () => {
       });
   });
 
-  it('it dispatches a loading action adn a fetch login action', () => {
+  it('it dispatches a loading action and a fetch sign up action', () => {
     const thunk = signUpUser();
     const dispatch = jest.fn();
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verifyUser } from '../../actions/authActions';
-import { getUsername, getAuthError } from '../../selectors/authSelectors';
+import { getUsername, getAuthError, getLoggedOut } from '../../selectors/authSelectors';
 
 class Landing extends React.Component {
 
@@ -11,11 +11,14 @@ class Landing extends React.Component {
     history: PropTypes.object.isRequired,
     username: PropTypes.string,
     error: PropTypes.string,
-    fetchUser: PropTypes.func.isRequired
+    fetchUser: PropTypes.func.isRequired,
+    loggedOut: PropTypes.bool.isRequired
   }
 
   componentDidMount() {
-    this.props.fetchUser();
+    if(!this.props.loggedOut) {
+      this.props.fetchUser();
+    }
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -42,7 +45,8 @@ class Landing extends React.Component {
 
 const mapStateToProps = state => ({
   username: getUsername(state),
-  error: getAuthError(state)
+  error: getAuthError(state),
+  loggedOut: getLoggedOut(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -16,7 +16,8 @@ describe('Auth Reducer', () => {
       username: null,
       balance: 0,
       error: null,
-      transactions: []
+      transactions: [],
+      loggedOut: true
     };
 
     const newState = reducer(initialState, {
@@ -29,7 +30,8 @@ describe('Auth Reducer', () => {
       username: 'jack',
       balance: 0,
       error: null,
-      transactions: []
+      transactions: [],
+      loggedOut: false
     });
   });
 
@@ -84,7 +86,8 @@ describe('Auth Reducer', () => {
       username: null,
       balance: 0,
       error: null,
-      transactions: []
+      transactions: [],
+      loggedOut: true
     };
 
     const newState = reducer(initialState, {
@@ -97,7 +100,8 @@ describe('Auth Reducer', () => {
       username: 'jack',
       balance: 0,
       error: null,
-      transactions: []
+      transactions: [],
+      loggedOut: false
     });
   });
 

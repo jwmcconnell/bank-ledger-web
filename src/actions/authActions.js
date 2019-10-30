@@ -1,4 +1,4 @@
-import { fetchLogin, fetchSignUp, fetchVerify } from '../services/auth-api';
+import { fetchLogin, fetchSignUp, fetchVerify, fetchLogOut } from '../services/auth-api';
 
 export const LOGIN_LOADING = 'LOGIN_LOADING';
 export const LOGIN = 'LOGIN';
@@ -64,6 +64,28 @@ export const verifyUser = (user) => dispatch => {
     .catch(err => {
       dispatch({
         type: VERIFY_ERROR,
+        payload: err
+      });
+    });
+};
+
+export const LOG_OUT_LOADING = 'LOG_OUT_LOADING';
+export const LOG_OUT = 'LOG_OUT';
+export const LOG_OUT_ERROR = 'LOG_OUT_ERROR';
+export const logOutUser = (user) => dispatch => {
+  dispatch({
+    type: LOG_OUT_LOADING
+  });
+
+  return fetchLogOut(user)
+    .then(() => {
+      dispatch({
+        type: LOG_OUT,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: LOG_OUT_ERROR,
         payload: err
       });
     });

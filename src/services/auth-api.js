@@ -43,8 +43,18 @@ const fetchVerify = () => {
     .then(res => res.json());
 };
 
+const fetchLogOut = () => {
+  return fetch('http://localhost:3000/api/v1/auth/log-out', {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include'
+  })
+    .then(res => res.json());
+};
+
 export {
   fetchLogin,
   fetchSignUp,
-  fetchVerify
+  fetchVerify,
+  fetchLogOut
 };

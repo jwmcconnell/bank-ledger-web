@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import TransactionForm from './TransactionForm';
 import { makeDeposit, makeWithdrawal } from '../../actions/ledgerActions';
 import { Link } from 'react-router-dom';
+import { logOutUser } from '../../actions/authActions';
 
 class Home extends React.Component {
 
@@ -17,7 +18,16 @@ class Home extends React.Component {
     username: PropTypes.string,
     balance: PropTypes.number,
     makeDeposit: PropTypes.func.isRequired,
-    makeWithdrawal: PropTypes.func.isRequired
+    makeWithdrawal: PropTypes.func.isRequired,
+    logOut: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
+  }
+
+  handleLogOut = () => {
+    this.props.logOut()
+      .then(() => {
+        this.props.history.push('/landing');
+      });
   }
 
   handleSubmit = (e, transactionType) => {
@@ -46,6 +56,7 @@ class Home extends React.Component {
     return (
       <section>
         <h1>Home</h1>
+        <button onClick={this.handleLogOut}>Log Out</button>
         <Link to="/transactions">
           <button>View Transactions</button>
         </Link>
@@ -76,7 +87,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   makeDeposit: (amount) => dispatch(makeDeposit(amount)),
-  makeWithdrawal: (amount) => dispatch(makeWithdrawal(amount))
+  makeWithdrawal: (amount) => dispatch(makeWithdrawal(amount)),
+  logOut: () => dispatch(logOutUser())
 });
 
 export default connect(
