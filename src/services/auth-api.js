@@ -1,5 +1,5 @@
 const fetchLogin = (user) => {
-  return fetch('http://localhost:3000/api/v1/auth/login', {
+  return fetch('https://bank-ledger.herokuapp.com/api/v1/auth/login', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -17,7 +17,7 @@ const fetchLogin = (user) => {
 };
 
 const fetchSignUp = (user) => {
-  return fetch('http://localhost:3000/api/v1/auth/signup', {
+  return fetch('https://bank-ledger.herokuapp.com/api/v1/auth/signup', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -35,7 +35,7 @@ const fetchSignUp = (user) => {
 };
 
 const fetchVerify = () => {
-  return fetch('http://localhost:3000/api/v1/auth/verify', {
+  return fetch('https://bank-ledger.herokuapp.com/api/v1/auth/verify', {
     method: 'get',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include'
@@ -44,7 +44,7 @@ const fetchVerify = () => {
 };
 
 const fetchLogOut = () => {
-  return fetch('http://localhost:3000/api/v1/auth/log-out', {
+  return fetch('https://bank-ledger.herokuapp.com/api/v1/auth/log-out', {
     method: 'get',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include'
