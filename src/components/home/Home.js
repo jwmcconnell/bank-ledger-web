@@ -2,25 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getUsername, getAccountBalance } from '../../selectors/authSelectors';
 import { connect } from 'react-redux';
-import Deposit from './Deposit';
-import { makeDeposit } from '../../actions/ledgerActions';
+import TransactionForm from './TransactionForm';
+import { makeDeposit, makeWithdrawal } from '../../actions/ledgerActions';
 
 class Home extends React.Component {
 
   state = {
-    deposit: 0
+    deposit: 0,
+    withdrawal: 0
   }
   
   static propTypes = {
     username: PropTypes.string,
     balance: PropTypes.number,
-    makeDeposit: PropTypes.func.isRequired
+    makeDeposit: PropTypes.func.isRequired,
+    makeWithdrawal: PropTypes.func.isRequired
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e, transactionType) => {
     e.preventDefault();
-    this.props.makeDeposit(this.state.deposit);
-    this.setState({ deposit: 0 });
+    if(transactionType === 'deposit') {
+      this.props.makeDeposit(this.state.deposit);
+      this.setState({ deposit: 0 });
+    } else {
+      this.props.makeWithdrawal(this.state.withdrawal);
+      this.setState({ withdrawal: 0 });
+    }
+    
+    
   };
 
   handleUpdate = e => {
@@ -29,7 +38,7 @@ class Home extends React.Component {
   
   render() {
     const { balance } = this.props;
-    const { deposit } = this.state;
+    const { deposit, withdrawal } = this.state;
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -39,10 +48,17 @@ class Home extends React.Component {
       <section>
         <h1>Home</h1>
         <h3>Balance: { formattedBalance }</h3>
-        <Deposit 
+        <TransactionForm 
           handleSubmit={this.handleSubmit} 
           handleUpdate={this.handleUpdate}
           depositValue={deposit}
+          transactionType='deposit'
+        />
+        <TransactionForm 
+          handleSubmit={this.handleSubmit} 
+          handleUpdate={this.handleUpdate}
+          depositValue={withdrawal}
+          transactionType='withdrawal'
         />
       </section>
     );
@@ -56,7 +72,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  makeDeposit: (amount) => dispatch(makeDeposit(amount))
+  makeDeposit: (amount) => dispatch(makeDeposit(amount)),
+  makeWithdrawal: (amount) => dispatch(makeWithdrawal(amount))
 });
 
 export default connect(

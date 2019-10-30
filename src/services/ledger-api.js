@@ -31,7 +31,23 @@ const fetchDeposit = (amount) => {
     });
 };
 
+const fetchWithdrawal = (amount) => {
+  return fetch('http://localhost:3000/api/v1/ledger/withdrawal', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ amount })
+  })
+    .then(res => ([res.ok, res.json()]))
+    .then(([ok, json]) => {
+      if(!ok) throw 'Error making withdrawal.';
+
+      return json;
+    });
+};
+
 export {
   fetchBalance,
-  fetchDeposit
+  fetchDeposit,
+  fetchWithdrawal
 };

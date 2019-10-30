@@ -1,4 +1,4 @@
-import { fetchBalance, fetchDeposit } from '../services/ledger-api';
+import { fetchBalance, fetchDeposit, fetchWithdrawal } from '../services/ledger-api';
 
 export const BALANCE_LOADING = 'BALANCE_LOADING';
 export const BALANCE = 'BALANCE';
@@ -41,6 +41,29 @@ export const makeDeposit = (amount) => dispatch => {
     .catch(err => {
       dispatch({
         type: DEPOSIT_ERROR,
+        payload: err
+      });
+    });
+};
+
+export const WITHDRAWAL_LOADING = 'WITHDRAWAL_LOADING';
+export const WITHDRAWAL = 'WITHDRAWAL';
+export const WITHDRAWAL_ERROR = 'WITHDRAWAL_ERROR';
+export const makeWithdrawal = (amount) => dispatch => {
+  dispatch({
+    type: WITHDRAWAL_LOADING
+  });
+
+  return fetchWithdrawal(amount)
+    .then(transaction => {
+      dispatch({
+        type: WITHDRAWAL,
+        payload: transaction
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: WITHDRAWAL_ERROR,
         payload: err
       });
     });
