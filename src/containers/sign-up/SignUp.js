@@ -4,6 +4,7 @@ import AuthForm from '../../components/shared/AuthForm';
 import { getUsername, getAuthError } from '../../selectors/authSelectors';
 import { signUpUser } from '../../actions/authActions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class SignUp extends React.Component {
 
@@ -44,13 +45,14 @@ class SignUp extends React.Component {
   render() {
     const { error } = this.props;
     return (
-      <section>
+      <section style={{ textAlign: 'center' }}>
         <h1>Sign Up</h1>
         <AuthForm 
           handleSubmit={this.handleSubmit} 
           handleUpdate={this.handleUpdate} 
           errorMessage={error}
         />
+        <Link to="/sign-up">Create an account</Link>
       </section>
     );
   }
