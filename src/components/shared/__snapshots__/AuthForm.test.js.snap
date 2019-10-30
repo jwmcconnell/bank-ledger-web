@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthForm component renders AuthForm 1`] = `
+<form
+  onSubmit={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "margin": "auto",
+      "width": 400,
+    }
+  }
+>
+  <label
+    style={
+      Object {
+        "margin": 10,
+      }
+    }
+  >
+    Username:
+    <input
+      name="username"
+      onChange={[Function]}
+      type="test"
+    />
+  </label>
+  <label
+    style={
+      Object {
+        "margin": 10,
+      }
+    }
+  >
+    Password:
+    <input
+      name="password"
+      onChange={[Function]}
+      type="password"
+    />
+  </label>
+  <button>
+    Submit
+  </button>
+  <span>
+    error
+  </span>
+</form>
+`;
